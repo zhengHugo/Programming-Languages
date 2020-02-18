@@ -99,3 +99,10 @@ val ls3_empty = longest_string3([])
 val ls4 = longest_string4(["Abc", "1afds", "adfjs", "BJDK"])
 val ls4_empty = longest_string4([]) *)
 
+
+(* Problem 5 *)
+val longest_capitalized = longest_string2 o only_capitals
+
+
+(* val lc = longest_capitalized(["Abc", "1afds", "adfjs", "BJDK"])
+val lc_empty = longest_capitalized([]) *)
