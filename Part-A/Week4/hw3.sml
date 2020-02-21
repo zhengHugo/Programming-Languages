@@ -106,3 +106,40 @@ val longest_capitalized = longest_string2 o only_capitals
 
 (* val lc = longest_capitalized(["Abc", "1afds", "adfjs", "BJDK"])
 val lc_empty = longest_capitalized([]) *)
+
+(* Problem 6 *)
+val rev_string = String.implode o List.rev o String.explode
+
+(* val rs = rev_string("abcde")
+val rs_empty = rev_string("") *)
+
+(* Problem 7 *)
+fun first_answer(func)(xs) = 
+    case xs of 
+        [] => raise NoAnswer
+        | hd::tl => 
+            let val ret = func(hd)
+            in 
+                if isSome ret then valOf(ret) else first_answer(func)(tl)
+            end
+
+
+(* Problem 8 *)
+(* TODO: check sample answer *)
+fun all_answers(func)(xs) =
+    case xs of 
+        [] => SOME([]) 
+        | hd::tl => 
+            let val hd_result = func(hd);
+                val tl_result = all_answers(func)(tl);
+            in
+                if isSome(hd_result) andalso isSome(tl_result)
+                then SOME(valOf(func(hd)) @ valOf(tl_result))
+                else NONE
+            end
+
+
+(* fun func(x) = if x = 1 then NONE else SOME([x])
+val test = all_answers(func)([2,3,4,6,5,3,3]) *)
+
+
