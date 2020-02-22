@@ -142,4 +142,14 @@ fun all_answers(func)(xs) =
 (* fun func(x) = if x = 1 then NONE else SOME([x])
 val test = all_answers(func)([2,3,4,6,5,3,3]) *)
 
+(* Problem 9 *)
+(* a *)
+val count_wildcard = g (fn () => 1) (fn (x) => 0) 
+
+(* b *)
+val count_wild_and_variable_lengths =  g (fn () => 1) (String.size)
+
+(* c *)
+fun count_some_var(str, p) = 
+    g (fn () => 0) (fn (x) => if x = str then 1 else 0) p
 
