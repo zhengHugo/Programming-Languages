@@ -147,9 +147,42 @@ val test = all_answers(func)([2,3,4,6,5,3,3]) *)
 val count_wildcard = g (fn () => 1) (fn (x) => 0) 
 
 (* b *)
-val count_wild_and_variable_lengths =  g (fn () => 1) (String.size)
+val count_wild_and_variable_lengths = g (fn () => 1) (String.size)
 
 (* c *)
 fun count_some_var(str, p) = 
     g (fn () => 0) (fn (x) => if x = str then 1 else 0) p
+
+
+(* Problem 10 *)
+fun check_pat(p) = 
+    let 
+        fun val_list_from_pattern(p1) = 
+            case p1 of 
+                Variable s1     => [s1] 
+              | TupleP ps1      => 
+                    if List.length(ps1) = 0 then [] else
+                        val_list_from_pattern(hd ps1) 
+                            @ val_list_from_pattern(TupleP (tl ps1))
+                    
+              | _ => [];
+
+        fun distinct_list(str_list) = 
+            if List.length(str_list) = 0 orelse List.length(str_list) = 1 
+            then true
+            else
+                if List.exists(fn str => String.compare(str, hd str_list) = EQUAL) (tl str_list)
+                then false
+                else distinct_list(tl str_list)
+
+    in 
+            case p of 
+                TupleP ps => distinct_list(val_list_from_pattern(p))
+              | _ => true
+    end
+
+
+(* val pat1 = Variable "abc"
+val pat2 = TupleP [Variable "bcd", UnitP, Variable "cbd", TupleP [Variable "bcd"]]
+val test_10 = check_pat(pat2) *)
 
