@@ -186,3 +186,27 @@ fun check_pat(p) =
 val pat2 = TupleP [Variable "bcd", UnitP, Variable "cbd", TupleP [Variable "bcd"]]
 val test_10 = check_pat(pat2) *)
 
+
+(* Problem 11 *)
+fun match(v, p) = 
+    case p of 
+        Wildcard    => SOME([])
+      | Variable s  => SOME([(s, v)])
+      | UnitP       => (case v of Unit => SOME([]) | _ => NONE)
+      | ConstP i    => (case v of Const i1 => if i = i1 then SOME([]) else NONE
+                                    | _   => NONE)
+      | TupleP ps   => (case v of 
+                        Tuple vs => if List.length(ps) = List.length(vs)
+                                    then all_answers(fn (v1, p1) => match(v1, p1))(ListPair.zip(vs, ps))
+                                    else NONE
+                        | _ => NONE)
+      | ConstructorP (s1, p1) => (case v of 
+                                    Constructor (s2, v2) => 
+                                        if s1 = s2 then match(v2, p1) else NONE
+                                  | _ => NONE)
+      | _           => NONE
+
+(* val val1 = Tuple[Const 1, Unit, Constructor("abc", Const 3)]
+val pat1 = TupleP[ConstP 1, Variable "s", ConstructorP("abc", Variable "t")]
+
+val test = match(val1, pat1) *)
