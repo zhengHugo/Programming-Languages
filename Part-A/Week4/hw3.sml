@@ -204,9 +204,17 @@ fun match(v, p) =
                                     Constructor (s2, v2) => 
                                         if s1 = s2 then match(v2, p1) else NONE
                                   | _ => NONE)
-      | _           => NONE
 
 (* val val1 = Tuple[Const 1, Unit, Constructor("abc", Const 3)]
 val pat1 = TupleP[ConstP 1, Variable "s", ConstructorP("abc", Variable "t")]
-
 val test = match(val1, pat1) *)
+
+(* Problem 11 *)
+fun first_match(v, ps) = 
+    SOME(first_answer(fn p => match(v, p))(ps))
+    handle NoAnswer => NONE
+
+
+(* val val1 = Unit
+val ps1 = [ConstP 1, Variable "s", ConstructorP("abc", Variable "t")]
+val test = first_match(val1, ps1) *)
