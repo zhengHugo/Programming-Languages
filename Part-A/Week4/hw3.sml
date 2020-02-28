@@ -101,7 +101,7 @@ val ls4_empty = longest_string4([]) *)
 
 
 (* Problem 5 *)
-val longest_capitalized = longest_string2 o only_capitals
+val longest_capitalized = longest_string1 o only_capitals
 
 
 (* val lc = longest_capitalized(["Abc", "1afds", "adfjs", "BJDK"])
@@ -144,7 +144,7 @@ val test = all_answers(func)([2,3,4,6,5,3,3]) *)
 
 (* Problem 9 *)
 (* a *)
-val count_wildcard = g (fn () => 1) (fn (x) => 0) 
+val count_wildcards = g (fn () => 1) (fn (x) => 0) 
 
 (* b *)
 val count_wild_and_variable_lengths = g (fn () => 1) (String.size)
@@ -210,7 +210,7 @@ val pat1 = TupleP[ConstP 1, Variable "s", ConstructorP("abc", Variable "t")]
 val test = match(val1, pat1) *)
 
 (* Problem 11 *)
-fun first_match(v, ps) = 
+fun first_match v ps = 
     SOME(first_answer(fn p => match(v, p))(ps))
     handle NoAnswer => NONE
 
