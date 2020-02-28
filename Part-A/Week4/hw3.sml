@@ -125,7 +125,6 @@ fun first_answer(func)(xs) =
 
 
 (* Problem 8 *)
-(* TODO: check sample answer *)
 fun all_answers(func)(xs) =
     case xs of 
         [] => SOME([]) 
@@ -178,6 +177,7 @@ fun check_pat(p) =
     in 
             case p of 
                 TupleP ps => distinct_list(val_list_from_pattern(p))
+              | ConstructorP (s1, p1) => check_pat(p1)
               | _ => true
     end
 
