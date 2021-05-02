@@ -1,5 +1,18 @@
 {
   "cSpell.words": [
-    "cond"
+    "caar",
+    "cdar",
+    "cond",
+    "letrec",
+    "mcar",
+    "mcdr",
+    "mcons",
+    "mult",
+    "nats",
+    "nums",
+    "pixmap",
+    "posn",
+    "rackunit",
+    "tlans"
   ]
 }
