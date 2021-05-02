@@ -3,6 +3,7 @@
     "caar",
     "cdar",
     "cond",
+    "eval",
     "letrec",
     "mcar",
     "mcdr",
